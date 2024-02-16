@@ -30,16 +30,7 @@ public class GameManager : MonoBehaviour
     }
     //Temp 
 
-    private void InitialiseGame()
-    {
-        Debug.Log("Init");
-        if (m_laneManager != null)
-        {
-            m_laneManager.InitialiseLanes();
-        }
-        ResetGameState();
-        GameStarted();
-    }
+    
 
     private void GameStarted()
     {
@@ -65,5 +56,15 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Public Functions
+    public void InitialiseGame()
+    {
+        Debug.Log("Init");
+        if (m_laneManager != null)
+        {
+            m_laneManager.InitialiseLanes();
+        }
+        ResetGameState();
+        GameStarted();
+    }
     #endregion
 }

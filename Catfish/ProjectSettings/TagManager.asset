@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameManager
+  - DeathCube
+  - Obstacle
   layers:
   - Default
   - TransparentFX
