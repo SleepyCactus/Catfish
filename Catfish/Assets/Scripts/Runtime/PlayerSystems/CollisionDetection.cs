@@ -20,10 +20,11 @@ public class CollisionDetection : MonoBehaviour
         }
     }*/
 
+    [SerializeField] private string m_targetTag;
     [SerializeField] private UnityEvent m_event;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Obstacle")
+        if(other.tag == m_targetTag)
         {
             m_event.Invoke();
         }
