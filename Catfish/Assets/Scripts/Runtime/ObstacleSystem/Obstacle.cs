@@ -51,7 +51,7 @@ namespace ObstacleSystem
             {
                 return;
             }
-            m_rb.MovePosition(transform.position + transform.forward * (m_obstaclesManager.baseGameSpeed * m_speedScalar));
+            m_rb.MovePosition(transform.position + transform.forward * (m_obstaclesManager.GetCurrentSpeed() * m_speedScalar));
             
         }
 

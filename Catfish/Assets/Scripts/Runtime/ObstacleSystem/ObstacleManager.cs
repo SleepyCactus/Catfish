@@ -8,11 +8,12 @@ namespace ObstacleSystem
     public class ObstacleManager : MonoBehaviour
     {
         #region Variables
-        
 
-        public float baseGameSpeed = 0.1f;
+
+        [SerializeField] private AnimationCurve m_baseGameSpeed;
+        [SerializeField] private float m_speedScalar;
         [SerializeField] private LaneManager m_laneManager;
-        [SerializeField] private GameObject m_objectToSpawn;
+        [SerializeField] private GameObject[] m_objectsToSpawn;
         [SerializeField] private Transform m_spawnParent;
 
         private Coroutine spawnRoutine;
@@ -21,10 +22,10 @@ namespace ObstacleSystem
         #region Private Functions
         IEnumerator SpawnCycle()
         {
-            yield return new WaitForSeconds(Random.Range(1f, 3f));
+            yield return new WaitForSeconds(Random.Range(0.25f, 2f));
             Vector3 position = GetSpawnFromLane(m_laneManager.lanes[Random.Range(0,m_laneManager.lanes.Length)]);
             Quaternion rotation = Quaternion.Euler(0, 180, 0);
-            Instantiate(m_objectToSpawn, position,rotation,m_spawnParent);
+            Instantiate(m_objectsToSpawn[Random.Range(0,m_objectsToSpawn.Length)], position,rotation,m_spawnParent);
             StartCoroutine(SpawnCycle());
         }
         Vector3 GetSpawnFromLane(Lane _laneToSpawnOn)
@@ -61,6 +62,11 @@ namespace ObstacleSystem
             {
                 Destroy(obstacle);
             }
+        }
+
+        public float GetCurrentSpeed()
+        {
+            return m_baseGameSpeed.Evaluate(Mathf.Clamp(Time.fixedTime/100000,0.1f,1)) * m_speedScalar;
         }
         #endregion
     }

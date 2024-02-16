@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     #region Variables
     [SerializeField] private LaneManager m_laneManager;
     [SerializeField] private ObstacleManager m_obstacleManager;
+    [SerializeField] private ScoreManager m_scoreManager;
     [SerializeField] PlayerController m_playerController;
     #endregion
 
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
     private void ResetGameState()
     {
         Debug.Log("Reset");
+        m_scoreManager.ResetScore();
         m_playerController.ResetPlayer();
         m_obstacleManager.WipeObstacles();
     }

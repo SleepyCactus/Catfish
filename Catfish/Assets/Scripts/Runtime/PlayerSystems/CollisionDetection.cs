@@ -5,28 +5,30 @@ using UnityEngine.Events;
 
 public class CollisionDetection : MonoBehaviour
 {
-    /*
-     * Old Version that a little less fancy but works just as well - for those who understand this better
+    #region Variables
     [SerializeField] private GameManager m_gm;
+    [SerializeField] private ScoreManager m_sm;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Obstacle")
         {
-            if(m_gm == null)
+            if (m_sm != null)
             {
-                return
-            }
-            m_gm.InitaliseGame();
+                m_sm.AddScore(-10);
+            } 
         }
-    }*/
-
-    [SerializeField] private string m_targetTag;
-    [SerializeField] private UnityEvent m_event;
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == m_targetTag)
+        else if (other.tag == "Coin")
         {
-            m_event.Invoke();
+            if (m_sm != null)
+            {
+                Destroy(other.gameObject);
+                m_sm.AddScore(5);
+            }
         }
     }
+
+    #endregion
+
+    #region Private Function
+    #endregion
 }
