@@ -2675,6 +2675,10 @@ MonoBehaviour:
   m_laneManager: {fileID: 844992004}
   m_objectsToSpawn:
   - {fileID: 1591946452189114236, guid: 3d8d2ad16ce3c5044ae44146d01eb5d3, type: 3}
+  - {fileID: 1591946452189114236, guid: a910f29158b59794895eb124caf3f6f4, type: 3}
+  - {fileID: 1591946452189114236, guid: 6b09e2d52217c3945b0b03d8830db266, type: 3}
+  - {fileID: 1591946452189114236, guid: f9923f8b7cf7b004eac35c92835831fe, type: 3}
+  - {fileID: 1591946452189114236, guid: 2c73769435f5ebc4f81a8bebee299042, type: 3}
   m_spawnParent: {fileID: 53867795}
 --- !u!65 &804756752
 BoxCollider:
