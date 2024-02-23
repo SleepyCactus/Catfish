@@ -20,13 +20,11 @@ namespace ObstacleSystem
         #endregion
 
         #region Private Functions
-        IEnumerator SpawnCycle()
+        private void Spawn()
         {
-            yield return new WaitForSeconds(Random.Range(0.25f, 2f));
-            Vector3 position = GetSpawnFromLane(m_laneManager.lanes[Random.Range(0,m_laneManager.lanes.Length)]);
+            Vector3 position = GetSpawnFromLane(m_laneManager.lanes[m_laneManager.middleIndex]);
             Quaternion rotation = Quaternion.Euler(0, 180, 0);
             Instantiate(m_objectsToSpawn[Random.Range(0,m_objectsToSpawn.Length)], position,rotation,m_spawnParent);
-            StartCoroutine(SpawnCycle());
         }
         Vector3 GetSpawnFromLane(Lane _laneToSpawnOn)
         {
@@ -38,16 +36,22 @@ namespace ObstacleSystem
             output.z = 100;
             return output;
         }
+         
+        private void OnTriggerExit(Collider collision)
+        {
+            Debug.Log(collision.tag);
+            if(collision.tag == "Chunk")
+            {
+                Debug.Log("Collison With Chunk");
+                Spawn();
+            }
+        }
         #endregion
 
         #region public Functions
         public void StartObstacles()
         {
-            if(spawnRoutine != null)
-            {
-                StopCoroutine(spawnRoutine);
-            }
-            spawnRoutine = StartCoroutine(SpawnCycle());
+            Spawn();
         }
 
         public void WipeObstacles()
