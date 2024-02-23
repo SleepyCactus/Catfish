@@ -8,6 +8,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private int m_score;
     [SerializeField] private int m_highScore;
     [SerializeField] private TMPro.TMP_Text m_scoreUI;
+    [SerializeField] private TMPro.TMP_Text m_highScoreUI;
     #endregion
 
     #region Private Functions
@@ -19,6 +20,13 @@ public class ScoreManager : MonoBehaviour
         }
 
         m_scoreUI.text = m_score.ToString();
+
+        if (m_highScoreUI == null)
+        {
+            return;
+        }
+
+        m_highScoreUI.text = m_highScore.ToString();
     }
     #endregion
 

@@ -12,9 +12,9 @@ public class CollisionDetection : MonoBehaviour
     {
         if (other.tag == "Obstacle")
         {
-            if (m_sm != null)
+            if (m_gm != null)
             {
-                m_sm.AddScore(-10);
+                m_gm.EndGame();
             } 
         }
         else if (other.tag == "Coin")
