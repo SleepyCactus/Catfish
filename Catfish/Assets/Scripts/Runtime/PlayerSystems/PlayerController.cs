@@ -9,17 +9,39 @@ namespace PlayerSystems
     {
         #region Variables
         public Lane currentLane;
+        public bool immune;
+        
 
         [SerializeField] private LaneManager m_laneManager;
         [SerializeField] private float m_speed;
+        [SerializeField] Material m_material;
+        private float phaseCharge = 1;
+        private float phaseDisplayValue = 0;
 
         private int m_laneIndex;
         private Coroutine m_moveCoroutine;
         #endregion
 
         #region Private Functions
+
+        private void FixedUpdate()
+        {
+            m_material.SetFloat("_Phase", phaseDisplayValue);
+        }
         private void Update()
         {
+            BounceOffset();
+            if (Input.GetKey(KeyCode.Space))
+            {
+                immune = true;
+                phaseDisplayValue = phaseCharge / 1;
+                return;
+            }
+            else
+            {
+                phaseDisplayValue = 0;
+                immune = false;
+            }
             if (Input.GetKeyDown(KeyCode.A))
             {
                 GetNextLane(-1);
@@ -28,7 +50,8 @@ namespace PlayerSystems
             {
                 GetNextLane(1);
             }
-            BounceOffset();
+            
+            
         }
         private void GetNextLane(int _direction)
         {

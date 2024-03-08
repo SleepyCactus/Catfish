@@ -1,3 +1,4 @@
+using PlayerSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,14 +9,19 @@ public class CollisionDetection : MonoBehaviour
     #region Variables
     [SerializeField] private GameManager m_gm;
     [SerializeField] private ScoreManager m_sm;
+    [SerializeField] private PlayerController m_pm;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Obstacle")
         {
-            if (m_gm != null)
-            {
-                m_gm.EndGame();
-            } 
+            if (m_gm == null)
+            {return;}
+            if (m_pm == null)
+            { return;}
+            if (m_pm.immune)
+            { return;}
+
+            m_gm.EndGame();
         }
         else if (other.tag == "Coin")
         {

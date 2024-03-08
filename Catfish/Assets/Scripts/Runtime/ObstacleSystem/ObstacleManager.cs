@@ -33,7 +33,7 @@ namespace ObstacleSystem
             { 
                 output = _laneToSpawnOn.position;
             }
-            output.z = 100;
+            output.z = transform.position.z;
             return output;
         }
          
