@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class CollisionDetection : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private GameManager m_gm;
+    //[SerializeField] private GameManager m_gm;
     [SerializeField] private ScoreManager m_sm;
     [SerializeField] private PlayerController m_pm;
     private void OnTriggerEnter(Collider other)
@@ -15,14 +15,14 @@ public class CollisionDetection : MonoBehaviour
         
         if (other.tag == "Obstacle")
         {
-            if (m_gm == null)
+            if (GameManager.Instance == null)
             {return;}
             if (m_pm == null)
             { return;}
             if (m_pm.IsImmune)
             { return;}
 
-            m_gm.EndGame();
+            GameManager.Instance.EndGame();
         }
         else if (other.tag == "Coin")
         {

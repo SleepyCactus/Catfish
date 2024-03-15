@@ -9,10 +9,12 @@ namespace ObstacleSystem
     {
         #region Variables
 
-
+        [Header("Settings")]
         [SerializeField] private AnimationCurve m_baseGameSpeed;
         [SerializeField] private float m_speedScalar;
+        [Header("References")]
         [SerializeField] private LaneManager m_laneManager;
+        [Header("Spawn Data")]
         [SerializeField] private GameObject[] m_objectsToSpawn;
         [SerializeField] private Transform m_spawnParent;
 
@@ -22,7 +24,7 @@ namespace ObstacleSystem
         #region Private Functions
         private void Spawn()
         {
-            Vector3 position = GetSpawnFromLane(m_laneManager.lanes[m_laneManager.middleIndex]);
+            Vector3 position = GetSpawnFromLane(m_laneManager.Lanes[m_laneManager.MiddleIndex]);
             Quaternion rotation = Quaternion.Euler(0, 180, 0);
             Instantiate(m_objectsToSpawn[Random.Range(0,m_objectsToSpawn.Length)], position,rotation,m_spawnParent);
         }

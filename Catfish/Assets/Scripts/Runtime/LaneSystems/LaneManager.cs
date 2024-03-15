@@ -7,19 +7,33 @@ namespace LaneSystem
     public class LaneManager : MonoBehaviour
     {
         #region Variables
-        public int middleIndex;
-        [SerializeField] public Lane[] lanes;
+        public static LaneManager Instance;
+        public int MiddleIndex;
+        [SerializeField] public Lane[] Lanes;
         [SerializeField] private float m_laneSpacing = 1;
         [SerializeField] private int m_laneNumber;
         #endregion
 
 
         #region Private Functions
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
+
         private void OnDrawGizmos()
         {
-            for (int i = 0; i < lanes.Length; i++)
+            for (int i = 0; i < Lanes.Length; i++)
             {
-                if (lanes[i].playerOccupied)
+                if (Lanes[i].playerOccupied)
                 {
                     Gizmos.color = Color.green;
                 }
@@ -27,20 +41,21 @@ namespace LaneSystem
                 {
                     Gizmos.color = Color.grey;
                 }
-                Gizmos.DrawCube(lanes[i].position, new Vector3(0.25f, 0.25f, 100));
+                Gizmos.DrawCube(Lanes[i].position, new Vector3(0.25f, 0.25f, 100));
             }
         }
         #endregion
 
 
         #region Public Functions
+        // Used to create x amount of lanes & Set middle index to middle lane 
         public void InitialiseLanes()
         {
-            middleIndex = Mathf.FloorToInt(m_laneNumber / 2.0f);
-            lanes = new Lane[m_laneNumber];
-            for (int i = 0; i < lanes.Length; i++)
+            MiddleIndex = Mathf.FloorToInt(m_laneNumber / 2.0f);
+            Lanes = new Lane[m_laneNumber];
+            for (int i = 0; i < Lanes.Length; i++)
             {
-                lanes[i] = new Lane(true, new Vector3((i - (middleIndex)) * m_laneSpacing, 0, 0));
+                Lanes[i] = new Lane(true, new Vector3((i - (MiddleIndex)) * m_laneSpacing, 0, 0));
             }
         }
         #endregion

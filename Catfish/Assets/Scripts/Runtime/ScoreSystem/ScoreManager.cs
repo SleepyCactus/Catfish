@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private int m_highScore;
     [SerializeField] private TMPro.TMP_Text m_scoreUI;
     [SerializeField] private TMPro.TMP_Text m_highScoreUI;
+
     #endregion
 
     #region Private Functions
@@ -44,3 +46,4 @@ public class ScoreManager : MonoBehaviour
     }
     #endregion
 }
+

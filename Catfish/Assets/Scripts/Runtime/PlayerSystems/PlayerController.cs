@@ -59,12 +59,12 @@ namespace PlayerSystems
             {
                 return;
             }
-            if (m_laneIndex + _direction >= m_laneManager.lanes.Length)
+            if (m_laneIndex + _direction >= m_laneManager.Lanes.Length)
             {
                 return;
             }
             m_laneIndex += _direction;
-            MoveToNewLane(m_laneManager.lanes[m_laneIndex]);
+            MoveToNewLane(m_laneManager.Lanes[m_laneIndex]);
             return;
         }
 
@@ -100,8 +100,8 @@ namespace PlayerSystems
         public void ResetPlayer()
         {
             CurrentLane.playerOccupied = false;
-            m_laneIndex = m_laneManager.middleIndex;
-            CurrentLane = m_laneManager.lanes[m_laneIndex];
+            m_laneIndex = m_laneManager.MiddleIndex;
+            CurrentLane = m_laneManager.Lanes[m_laneIndex];
             transform.position = CurrentLane.position;
             CurrentLane.playerOccupied = true;
         }
