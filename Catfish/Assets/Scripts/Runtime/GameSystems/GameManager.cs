@@ -8,10 +8,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     #region Variables
+    // References to all systems GameManager manages
     [SerializeField] private LaneManager m_laneManager;
     [SerializeField] private ObstacleManager m_obstacleManager;
     [SerializeField] private ScoreManager m_scoreManager;
-    [SerializeField] PlayerController m_playerController;
+    [SerializeField] private PlayerController m_playerController;
+    // UI Elements used by GameManager
     [SerializeField] private GameObject m_deathUI;
     [SerializeField] private GameObject m_mainMenuUI;
     #endregion
@@ -22,26 +24,7 @@ public class GameManager : MonoBehaviour
         InitialiseGame();
     }
 
-    //Temp 
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            InitialiseGame();
-        }
-    }
-    //Temp 
-
-    
-
-   
-
-    private void GameEnded()
-    {
-        Debug.Log("Ended");
-    }
-
+    //
     private void ResetGameState()
     {
         Debug.Log("Reset");
@@ -50,7 +33,7 @@ public class GameManager : MonoBehaviour
         m_obstacleManager.WipeObstacles();
     }
 
-
+    //
     IEnumerator RestartGameDelay()
     {
         float t = 0f;
@@ -66,6 +49,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Public Functions
+    //
     public void InitialiseGame()
     {
         Time.timeScale = 1f;
@@ -80,7 +64,8 @@ public class GameManager : MonoBehaviour
         
         
     }
-
+    // Called by UI Event in Scene -> On MainMenu PlayButton
+    // Hides Main menu & Begins obstacle system
     public void GameStarted()
     {
         Debug.Log("Started");
@@ -89,9 +74,8 @@ public class GameManager : MonoBehaviour
         {
             m_obstacleManager.StartObstacles();
         }
-        GameEnded();
     }
-
+    //
     public void EndGame()
     {
         m_deathUI.SetActive(true);

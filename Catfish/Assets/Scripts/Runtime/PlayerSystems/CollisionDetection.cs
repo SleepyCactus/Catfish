@@ -12,13 +12,14 @@ public class CollisionDetection : MonoBehaviour
     [SerializeField] private PlayerController m_pm;
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.tag == "Obstacle")
         {
             if (m_gm == null)
             {return;}
             if (m_pm == null)
             { return;}
-            if (m_pm.immune)
+            if (m_pm.IsImmune)
             { return;}
 
             m_gm.EndGame();

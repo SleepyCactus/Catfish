@@ -8,15 +8,15 @@ namespace PlayerSystems
     public class PlayerController : MonoBehaviour
     {
         #region Variables
-        public Lane currentLane;
-        public bool immune;
+        public Lane CurrentLane;
+        public bool IsImmune;
         
 
         [SerializeField] private LaneManager m_laneManager;
         [SerializeField] private float m_speed;
         [SerializeField] Material m_material;
-        private float phaseCharge = 1;
-        private float phaseDisplayValue = 0;
+        private float m_phaseCharge = 1;
+        private float m_phaseDisplayValue = 0;
 
         private int m_laneIndex;
         private Coroutine m_moveCoroutine;
@@ -26,21 +26,21 @@ namespace PlayerSystems
 
         private void FixedUpdate()
         {
-            m_material.SetFloat("_Phase", phaseDisplayValue);
+            m_material.SetFloat("_Phase", m_phaseDisplayValue);
         }
         private void Update()
         {
             BounceOffset();
             if (Input.GetKey(KeyCode.Space))
             {
-                immune = true;
-                phaseDisplayValue = phaseCharge / 1;
+                IsImmune = true;
+                m_phaseDisplayValue = m_phaseCharge / 1;
                 return;
             }
             else
             {
-                phaseDisplayValue = 0;
-                immune = false;
+                m_phaseDisplayValue = 0;
+                IsImmune = false;
             }
             if (Input.GetKeyDown(KeyCode.A))
             {
@@ -89,9 +89,9 @@ namespace PlayerSystems
                 transform.position = Vector3.Lerp(currentPos, targetPosition, t);
                 yield return null;
             }
-            currentLane.playerOccupied = false;
-            currentLane = _targetLane;
-            currentLane.playerOccupied = true;
+            CurrentLane.playerOccupied = false;
+            CurrentLane = _targetLane;
+            CurrentLane.playerOccupied = true;
             m_moveCoroutine = null;
         }
         #endregion
@@ -99,11 +99,11 @@ namespace PlayerSystems
         #region Public functions
         public void ResetPlayer()
         {
-            currentLane.playerOccupied = false;
+            CurrentLane.playerOccupied = false;
             m_laneIndex = m_laneManager.middleIndex;
-            currentLane = m_laneManager.lanes[m_laneIndex];
-            transform.position = currentLane.position;
-            currentLane.playerOccupied = true;
+            CurrentLane = m_laneManager.lanes[m_laneIndex];
+            transform.position = CurrentLane.position;
+            CurrentLane.playerOccupied = true;
         }
         public void MoveToNewLane(Lane _targetLane)
         {
